@@ -1,0 +1,55 @@
+        <nav class="navbar navbar-expand-lg navbar-light bg-info" style="color=black;">
+            <a class="navbar-brand" href="{{path('homepage')}}">Projet SYM</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-chart-line"></i> Dashbord<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('admin_ads_index')}}"><i class="fas fa-hotel"></i> Annonces</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('admin_bookings_index')}}"><i class="fas fa-folder"></i> Réservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('admin_comments_index')}}"><i class="fas fa-comments"></i> Commentaires</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('admin_users_index')}}"><i class="fas fa-users"></i> Utilisateurs</a>
+                </li>
+                </ul>
+                
+                <ul class="navbar-nav ">
+                    <a href="{{path('homepage')}}" target="_blank" class="nav-link">
+                        <i class="fas fa-eye"></i>Voir le site
+                    </a>                       
+                    <li class="nav-item dropdown">
+
+                            {% if app.user %}
+                                <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="{{path('account_profile')}}"  role="button" aria-haspopup="true" aria-expanded="false" style="color:white;display:inline-block;"><img src="{{app.user.avatar}}" style="width:60px;height:60px;border-radius:60px;"/></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{path('account_index')}}">Bonjour <strong>{{app.user.tnom}}</strong></a>
+                                    <a class="dropdown-item" href="{{path('admin_account_logout')}}">Déconnexion</a>
+                                    
+                                </div>
+                            {% endif %}
+
+
+                    </li>
+                </ul>  
+                
+            </div>
+</nav>
+{% for label,messages in app.flashes %}
+    <div class='container'>
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+            <p>{{ message| raw }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

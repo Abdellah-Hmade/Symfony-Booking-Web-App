@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil {{user.tnom}}{% endblock %}
+
+{% block body %}
+<div class="container ">
+    <div class="row align-items-center mb-5">
+        <div class="col-3 text-center">
+        <img src="{{user.avatar}}" class="avatar" alt="avatar de {{user.tnom}}">
+        <br>
+        <span class="badge badge-primary mb-3">{{user.anonces |length}} annonces</span>
+        </div>
+        <div class="col-9">
+            <h1>{{user.tnom}}</h1>
+        {% if user is same as(app.user) %}
+        <div class="mt-3">
+            <a class="btn btn-primary mr-2 mb-2" href="{{path('account_profile')}}">Modifier mes informations</a>
+            <a class="btn btn-primary mr-2 mb-2" href="{{path('account_up_password')}}">Modifier Mot de passe </a>
+        </div>
+        {% endif %}
+        
+        </div>
+            </div>
+            {{user.description | raw}}
+            <h2><strong>Les annoces de {{user.tnom}}</strong></h2>
+            {% if user.anonces | length >0 %}
+                <div class="row align-items-center">
+                {% for anonce in user.anonces %}
+                    {% include "anonce/_anonce.html.twig" %}    
+                {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            <p><strong>{{user.tnom}} n'a pas d'annoce sur le site.</strong></p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

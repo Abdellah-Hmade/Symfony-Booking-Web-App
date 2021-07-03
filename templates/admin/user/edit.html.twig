@@ -1,0 +1,22 @@
+{% extends "admin/base.html.twig"%}
+{% block title %}Modification des informations de l'utilisateur N°{{user.id}}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<h1 clas="my-5">Modification des informations de l'utilisateur {{user.tnom}}</h1>
+
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h4 class="card-title">Corriger les Informations Générales</h4>
+                </div>
+                <div class="card-body">
+                    {{form_start(form)}}                
+                    {{form_widget(form)}}
+                    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i>Confirmer</button>
+                    {{form_end(form)}}
+                </div>
+            </div>
+    
+        </div>
+       
+{% endblock %}

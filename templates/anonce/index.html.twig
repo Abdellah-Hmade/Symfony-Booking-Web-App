@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annoces{% endblock %}
+
+{% block body %}
+<h1  class="text-center mt-5"><strong>Page des Annoces</strong></h1>
+<div class="row justify-content-center mt-5" align='center'> 
+{% for anonce in Anonces %}
+{% include "anonce/_anonce.html.twig" %}
+{% endfor %}
+</div>
+{% endblock %}

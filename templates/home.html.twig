@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+          {% block title %}Home{% endblock %}
+            
+             
+            
+          {% block body %} 
+
+            <div class="jumbotron" align="center">
+                <h1><strong>Bienvenue à Projet SYM</strong></h1>
+                <p>Un site qui met en relation les voyageus embitieux et les propriètaires des <em>Airbnb's</em></p>
+                <p><a class="btn btn-primary btn-lg" href="{{path('anonces_index')}}">Voir nos annonces</a></p>
+            </div>
+            <h2 align='center'><strong>Nos appartements stars</strong></h2>
+            
+             <div class="row justify-content-center mt-5" align='center'> 
+              {% for data in anonces %}
+                {% include "anonce/_anonce.html.twig" with {'anonce':data.annonce}%}
+              {% endfor %}
+            </div>
+           <h2 class='justify-content-center mt-5' align='center'><strong>Nos Éditeurs </strong></h2>
+            <div class="row justify-content-center mt-5" align="center"> 
+              {% for data in users %}
+              <div class="col-md-3">
+                
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title"><img src="{{data.user.avatar}}" class="avatar avatar-medium">{{ data.user.tnom}}</h4>
+                    <div class="card-text">
+                      <p>{{data.user.introduction}}</p>
+                      <a href="{{path('user_show',{'adresse':data.user.adresse})}}" class="card-link">Card link</a>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+             {% endfor %}
+            </div>
+          
+          {% endblock %}

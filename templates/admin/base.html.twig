@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <title>Projet SYM -ADMIN- {% block title %}{% endblock %}</title>
+        
+        <link rel="stylesheet" href="/css/fontawesome/css/all.css"/>
+        <link rel="stylesheet" href="/build/css/app.css"/>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% include "admin/sharred/header.html.twig" %}
+        {% block body %}{% endblock %}
+        {% include "admin/sharred/footer.html.twig" %}
+        <script src="/js/jquerry.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

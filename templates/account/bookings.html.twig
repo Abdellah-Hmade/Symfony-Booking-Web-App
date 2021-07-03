@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% block title %}Vos Réservations{% endblock %}
+{% block body %}
+<div class="container">
+    <h1><strong>Mes réservations</strong></h1>
+    <div class="alert alert-info mt-5">
+        <p>Retrouver ci-dessous toutes vos réservations passées et à venir</p>
+
+    </div>
+    {% for booking in app.user.bookings %}
+        <div class="row mt-5">
+        <div class="col-md-4">
+            <img src="{{booking.ad.coverImage}}" alt="Photo de l'annonce {{booking.ad.titre}}" class="img-fluid">
+            <div class="">
+                {% set comment = booking.ad.commentFromAuthor(app.user) %}
+                {% if comment is not null  %}
+                <strong>Note donnée :</strong>{% include "sharred/rating.html.twig" with {'rating':comment.rating }%}
+                {% else %}
+                <p>Vous n'avez pas encore donné de note.<br> <a href="{{path('booking_show',{'id': booking.id })}}" class="btn btn-link">donner votre avis!</a></p>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="col-md-8">
+            <h4>{{booking.ad.titre}}</h4>
+            <p> Réservation <strong>N° {{booking.id}}</strong>
+            <br> Du {{booking.startDate|date('d/m/Y')}} Au {{booking.endDate|date('d/m/Y')}}
+            </p>
+            <div class="alert alert-info text-center">Montant :<strong>{{booking.amount}}&dollar;</strong></div>
+            <div class="text-center"><a href="{{path('booking_show',{'id': booking.id})}}" class="btn btn-info ">Plus d'informations</a></div>
+        </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

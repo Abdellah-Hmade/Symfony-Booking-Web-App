@@ -1,0 +1,53 @@
+<!Doctype html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="">
+<title>Connexion à l'admininstration</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
+        <link rel="stylesheet" href="/css/app.css"/>
+<style>
+    body{
+        display: flex;
+        justify-content:center;
+        height:100vh;
+    }
+    .card{
+        margin-top:10%;
+    }
+</style>
+</head>
+<body>
+<div class="col-md-4 text-center">
+<div class="card bg-light">
+<div class="card-header">
+<h4 class="card-title">
+<i class="fas fa-lock"></i>
+Connexion à l'administration
+</h4>
+</div>
+<div class="card-body">
+{% if hasError %}
+        <div class="alert alert-danger">Une erreur est survenue ,l'email ou mot de passe est incorrecte(s)</div>
+        {% endif %}
+<form action="" method="post">
+    <div class="form-group">
+    <label for="_username">Email</label>
+    <input class="form-group" name="_username" type="email" placeholder="Adresse Email ..."/>
+    </div>
+    <div class="form-group">
+    <label for="_password">Mot de passe</label>
+    <input class="form-group" name="_password" type="password" placeholder="Votre Mot de Passe ici"/>
+    </div>
+    <div class="form-group">
+
+    <button class="btn btn-success" type="submit"><i class="fas fa-lock-open"></i>Connexion</button>
+    <a href="{{path('homepage')}}" class="btn btn-link"><i class="fas fa-arrow-circle-left"></i>Retour au site</a>
+    </div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

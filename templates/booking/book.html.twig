@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver l'annonce: {{ anonce.titre }}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" integrity="sha512-x2MVs84VwuTYP0I99+3A4LWPZ9g+zT4got7diQzWB4bijVsfwhNZU2ithpKaq6wTuHeLhqJICjqE6HffNlYO7w==" crossorigin="anonymous" />
+{% endblock %}
+{% block body %}
+
+
+<div class="container mt-5" style="margin:auto;border-radius:20px;border:2px solid #829eff;width:650px;padding-top:50px;padding-bottom:50px; ">
+    <h1 class="mt-5 mb-5 text-center">Réserver l'annonce {{ anonce.titre }}! ✅</h1>
+    <p class="text-center"> Vous êtes sur le point de réserver le bien de <strong>{{anonce.auteur.tnom}}</strong></p>
+{{form_start(form)}}
+<div class="alert alert-light">
+    <h2 class="mb-2">Veuillez remplir les champs ci-dessous :</h2>
+    <div class="row">
+        <div class="col">
+            {{form_row(form.startDate)}}
+        </div>
+        <div class="col">
+            {{form_row(form.endDate)}}
+        </div>
+    </div>
+    
+
+</div>
+<div class="container text-center mt-3 mb-3" style="color:blue;">
+<h4><strong>Montant du séjour: <span id="amount">...</span>&dollar; </srtong></h4>
+ <p ><span id="days">0</span> nuits à {{anonce.prix}}&dollar; / nuit</p>
+ </div>
+ {{ form_row(form.comment) }}
+ <button class="btn btn-success mt-3 " type="submit">Réserver</button>
+ </div>
+    {% endblock %}
+
+ {% block javascripts %}
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js" integrity="sha512-cOGL6gI01KK2Bws211W8S3COhzrorBbzKvLPWYOVtSEYet3yG1fzJrimtwh8rUyvMy9qjgY2e7Rt6IwyaiX1Mg==" crossorigin="anonymous"></script>
+ <script>
+ $(document).ready(function(){
+     $('#booking_startDate, #booking_endDate').datepicker({
+         format:'dd/mm/yyyy',
+         datesDisabled:[
+             {% for day in anonce.notAvailableDays %}
+                 "{{day.format('d/m/Y') }}",
+             {% endfor %}
+         ],
+         startDate: new Date()
+     });
+     $('#booking_startDate, #booking_endDate').on('change',calculateAmount);
+ });
+ function calculateAmount(){
+     const endDate=new Date($('#booking_endDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/,'$3-$2-$1'));
+    const startDate=new Date($('#booking_startDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/,'$3-$2-$1'));
+    if(startDate && endDate && startDate < endDate){
+        const Day_time=24*60*60*1000;
+        const interval=endDate.getTime()-startDate.getTime();
+        const days=interval/Day_time;
+        const amount=days*{{ anonce.prix }};
+        $('#days').text(days);
+        $('#amount').text(amount.toLocaleString('fr-FR'));
+    }
+ }
+ </script>
+ {% endblock %}   

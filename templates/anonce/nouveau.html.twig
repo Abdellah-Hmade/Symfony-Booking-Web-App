@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Créer Annonce{% endblock %}
+
+{% form_theme form 'anonce/_collection.html.twig' %}
+
+{% block body %}
+<div class="container"><h1 class="text-center my-5">
+<strong >Création d'une Annonce!</strong></h1>
+
+{{ form_start(form) }}
+<div class="row">
+        <div class="col">
+                <div class="alert alert-light">
+                        <h2>Information Générales</h2>
+                        <hr>
+                        {{form_row(form.titre) }}
+                        {{form_row(form.adresse) }}
+                        {{form_row(form.prix) }}
+                        {{form_row(form.chambres) }}
+                </div>
+                <div class="alert alert-light">
+                <h2>Détails de l'annonce</h2>
+                <hr>
+                {{form_row(form.introduction) }}
+                {{form_row(form.content) }}
+
+                
+                </div>                            
+        </div>
+      <div class="col">
+      <div class="alert alert-light">
+      <h2>Images de l'annonce</h2>
+      <hr>
+      {{form_row(form.coverImage) }}
+        {{form_row(form.images) }}
+
+      </div>  
+</div>
+</div>
+<div class="text-center">
+{{form_row(form.save) }}
+</div>
+{{ form_end(form) }}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+        <script src='/js/anonce_new_edit.js'></script>
+{% endblock %}

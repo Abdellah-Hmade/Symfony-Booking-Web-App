@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des Annonces{% endblock %}
+
+{% block body %}
+{% set anonces = pagination.data %}
+
+<div class="container-fluid">
+    <h1 class="my-5">Gestion des annonces</h1>
+    <table class="table table-hover">    
+        <thead>
+            <tr>
+            <th class="text-center">Id</th>
+            <th class="text-center">Titre</th>
+            <th class="text-center">Auteur</th>
+            <th class="text-center">Réservations</th>
+            <th class="text-center">Note</th>
+            <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for anonce in anonces %}
+            <tr>
+                <td>{{anonce.id}}</td>
+                <td>{{anonce.titre}}</td>
+                <td><img src="{{ anonce.auteur.avatar }}" class="avatar mr-2" alt="Avatar de {{anonce.auteur.tnom}}" style="width:40px;height:40px;">{{anonce.auteur.tnom}}</td>
+                <td class="text-center"><span class="badge badge-primary rounded">{{anonce.bookings | length}}</span></td>
+                <td class="text-center"><span class="badge badge-primary rounded">{{anonce.avgRatings | number_format(1, ',',' ')}}</span></td>
+                <td>
+                <a href="{{path('admin_ads_edit',{'id':anonce.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                <a href="{{path('admin_ads_delete',{'id':anonce.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+{{pagination.display()}}
+    
+</div>
+{% endblock %}

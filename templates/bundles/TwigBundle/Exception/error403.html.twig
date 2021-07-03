@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{% block title %}Page Non trouvée{% endblock %}
+
+{% block body %}
+<div class="container text-center mt-5" style="margin:auto;border-radius:20px;border:2px solid #829eff;width:650px;padding-top:50px;padding-bottom:50px; ">
+<h1 class="mt-3" style="color:blue;">Vous n'étes pas autoriser à cette page.</h1>
+<p class="mt-3">Vous pouvez retourner à l'aceuil ou voir nos derniers annonces dans la Barre des menus .</p>
+<p><strong>Soyez le bienvenue.</strong></p>
+<a href="{{path('homepage')}}"><button class="btn btn-primary ml-1 mt-3" style="border-radius:5px;">Retour à l'acceuil</button></a>
+<a href="{{path('anonces_index')}}"><button class="btn btn-success ml-1 mt-3" style="border-radius:5px;">Nos annonces</button></a>
+</div>
+{% endblock %}

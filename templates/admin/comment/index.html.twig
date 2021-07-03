@@ -1,0 +1,41 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des Commentaires{% endblock %}
+{% set comments = pagination.data %}
+{% set page = pagination.page %}
+{% set pages = pagination.pages %}
+{% block body %}
+<div class="container-fluid">
+    <h1 class="my-5">Gestion des Commentaires</h1>
+    <table class="table table-hover">    
+        <thead>
+            <tr>
+            <th class="text-center">Id</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Auteur</th>
+            <th class="text-center">Commentaire</th>
+            <th class="text-center">Note</th>
+            <th class="text-center">Annonce</th>
+            <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{comment.id}}</td>
+                <td>{{comment.createdAt | date("d/m/Y")}}</td>
+                <td><img src="{{ comment.auteur.avatar }}" class="avatar mr-2" alt="Avatar de {{comment.auteur.tnom}}" style="width:40px;height:40px;">{{comment.auteur.tnom}}</td>
+                <td class="text-center">{{comment.content}}</td>
+                <td class="text-center"><span class="badge badge-primary rounded">{{comment.rating | number_format(1, ',',' ')}}</span></td>
+                <td class="text-center">{{comment.anonce.titre}}</td>
+                <td>
+                <a href="{{path('admin_comments_edit',{'id':comment.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                <a href="{{path('admin_comments_delete',{'id':comment.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>    
+{% endfor %}
+        </tbody>
+    </table>
+    {{pagination.display()}}
+</div>
+{% endblock %}

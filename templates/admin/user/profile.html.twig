@@ -1,0 +1,167 @@
+{% extends "admin/base.html.twig"%}
+{% block title %}Profile de l'utilisateur N°{{user.id}}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<h1 clas="my-5">Profile de l'utilisateur {{user.tnom}}</h1>
+
+    <div class="row pt-5 pb-5 pr-5 pl-5">
+        <div class="col">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h4 class="card-title">Informations Générales</h4>
+                </div>
+                <div class="card-body">
+                    <table>
+                    <tr>
+                    <td colspan="3" class="text-center"><img src="{{user.avatar}}" class="avatar avatar-medium" /></td>
+                    </tr>
+
+                    <tr>
+                    <th>ID</th><td>:</td><td>{{user.id}}</td>
+                    </tr>
+
+                    <tr>
+                    <th>Nom</th><td>:</td><td>{{user.nom}}</td>
+                    </tr>
+                    <tr>
+                    <th>Prénom</th><td>:</td><td>{{user.prenom}}</td>
+                    </tr>
+                    <tr>
+                    <th>Email</th><td>:</td><td>{{user.email}}</td>
+                    </tr>
+                    <tr>
+                    <th>Introduction</th><td>:</td><td><p>{{user.introduction}}</td>
+                    </tr>
+                    <tr>
+                    <th>Description</th><td>:</td><td>{{user.description}}</td>
+                    </tr>
+                    <tr>
+                    <th>Role</th><td>:</td>
+                    <td>
+                    {% if user.userRoles is empty %}
+                        <p> Utilisateur </p>
+                        
+                    {% else %}
+                        <p> Administrateur </p>
+                    {% endif %}
+                    </td>
+                    </tr>
+
+
+                    </table>
+    
+                </div>
+            </div>
+    
+        </div>
+        <div class="col">
+            <div class="card bg-light mb-5 ">
+                <div class="card-header">
+                    <h4 class="card-title">Les Annonces</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Id</th>
+                                <th>Titre de l'annonces</th>
+                                <th>Note</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for anonce in user.anonces  %}
+                            <tr>
+                                <td><img src="{{anonce.coverImage}}" style="width:100px;height:100px;" /></td>
+                                <td>{{anonce.id}}</td>
+                                <td>{{anonce.titre}}</td>
+                                <td><span class="badge badge-primary rounded">{{anonce.avgRatings | number_format(1, ',',' ')}}</span></td>
+                                <td>
+                                    <a href="{{path('admin_ads_edit',{'id':anonce.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="{{path('admin_ads_delete',{'id':anonce.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>    
+            
+        </div>
+    </div>        
+    <div class="row pt-5 pb-5 pr-5 pl-5">
+        <div class="col">
+            <div class="card bg-light mt-5 ">
+                <div class="card-header">
+                    <h4 class="card-title">Les Réservations</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titre de l'annonce</th>
+                                <th>Date de réservation</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for booking in user.bookings  %}
+                            <tr>
+                                <td>{{booking.id}}</td>
+                                <td>{{booking.ad.titre}}</td>
+                                <td>{{booking.createdAt| date('d/m/Y H:i')}}</td>
+                                <td>
+                                <a href="{{path('admin_bookings_edit',{'id':booking.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{path('admin_bookings_delete',{'id':booking.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>    
+        </div>
+        <div class="col">
+            <div class="card bg-light mt-5">
+                <div class="card-header">
+                    <h4 class="card-title">Les Commentaires</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titre De l'annonce</th>
+                                <th>Note</th>
+                                <th>Commentaire</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for comment in user.comments  %}
+                            <tr>
+                                <td>{{comment.id}}</td>
+                                <td>{{comment.anonce.titre}}</td>
+                                <td>{{comment.rating}}</td>
+                                <td>{{comment.content}}</td>
+                                <td>
+                                <a href="{{path('admin_comments_edit',{'id':comment.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{path('admin_comments_delete',{'id':comment.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

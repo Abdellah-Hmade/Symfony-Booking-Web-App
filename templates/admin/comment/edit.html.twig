@@ -1,0 +1,42 @@
+{% extends "admin/base.html.twig"%}
+
+{% block title %}Modification du Commentaire N°{{comment.id}}{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid ">
+
+    <h1 clas="my-5">Modification du Commentaire {{comment.id}}</h1>
+    <div class="badge badge-primary py-2" style="width:100% ;font-size:22px;">
+        <table style="width:100%;text-align:left;">
+            <tr style="">
+            <td>ID                 </td> <td>:</td> <td >{{comment.id}}</td>
+            </tr>
+            <tr><td>Titre de l'annonce </td> <td>:</td> <td>{{comment.anonce.titre}}</td></tr>
+            <tr><td>Auteur             </td> <td>:</td> <td><img src="{{ comment.auteur.avatar }}" class="avatar mr-2" alt="Avatar de {{comment.auteur.tnom}}" style="width:40px;height:40px;">{{comment.auteur.tnom}}</td></tr>
+            <tr><td>Note               </td> <td>:</td> <td>{{comment.rating | number_format(1, ',',' ')}}</td></tr>
+            <tr><td>Date               </td> <td>:</td> <td>{{comment.createdAt | date("d/m/Y")}}</td></tr>
+        </table>  
+    </div>
+
+    <div class="card bg-light">
+         <div class="card-header">
+            <h4 class="card-title">Corriger l'annonce ?</h4>
+        </div>
+        <div class="card-body">
+        
+    {{form_start(form)}}
+    
+            
+ 
+                    {{form_row(form.content)}}
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                    
+     
+
+    {{form_end(form)}}
+         </div>
+    </div>
+
+</div>
+{% endblock %}

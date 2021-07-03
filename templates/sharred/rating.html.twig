@@ -1,0 +1,13 @@
+<div class="ml-5">
+{% if rating != null %}<span class="rating ml-4">{% for i in 1..5 %}
+                
+                {% if i<= rating %}
+                <i class="fas fa-star"></i>
+                {% else %}
+                <i class="far fa-star"></i>
+                {% endif %}
+                
+                
+            {% endfor %}</span>{% else %}<p>--</p> {% endif %}</div>
+
+ {## {% include "sharred/rating.html.twig" with {'rating':comment.rating }%} ##}          

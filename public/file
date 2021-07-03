@@ -1,0 +1,14 @@
+#initiation server
+php bin/console server:run
+#creation du database dans le serveur mysql
+php bin/console doctrine:database:create
+#creation d'une entité
+php bin/console make:entity
+#creation du fichier de migration d'après les traitement faites sur une entité
+php bin/console make:migration
+#la modification de la base de données avrc la migration créer
+php bin/console doctrine:migrations:migrate
+#créer une fixtures
+php bin/console make:fixtures [NomFixtures]
+
+php bin/console debug:autowiring --all

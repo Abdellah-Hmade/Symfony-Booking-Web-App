@@ -1,0 +1,24 @@
+{% set url=path('anonce_show',{'adresse': anonce.adresse}) %}
+<div class="col-md-3 mt-5">
+  <div class="card">
+    <div class="card-header text-center">
+      <p class="text-center">{{anonce.chambres}} chambres, <strong>{{ anonce.prix }}&dollar; / nuit</strong><small class="text-center">{% include "sharred/rating.html.twig" with {'rating':anonce.getAvgRatings} %}</small></p>
+    </div>
+    <a href="{{url}}">
+    <img src="{{anonce.coverImage}}" alt='image'style="height:200px ;width:100%;display:block">
+    </a>
+    <div class="card-body" style="height:250px;">
+      <h4 class="card-title">
+        <a href="{{url}}">
+          {{anonce.titre}}
+        </a>
+      </h4>
+      <p class="card-text">{{anonce.introduction}}</p>
+      <a href="{{url}}" class="card-link">En savoir plus</a>
+      {% if app.user and app.user == anonce.auteur%}
+        <a href="{{path('anonce_editer',{'adresse':anonce.adresse})}}" class="card-link">editer l'annonce</a>
+      {% endif %}
+     <!--{# <a href="#" class="{{path('anonce_show',{'adresse': anonce.adresse})}}">Another link</a>#}-->
+    </div>
+  </div>
+</div>

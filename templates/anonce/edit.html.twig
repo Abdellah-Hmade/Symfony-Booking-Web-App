@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}editer l'annonce {% endblock %}
+
+{% form_theme form 'anonce/_collection.html.twig' %}
+
+{% block body %}
+<div class="container"><h1 class="text-center">
+<strong>Modifier l'annonce {{anonce.titre}}</strong></h1>
+{{ form_start(form) }}
+
+{{form_widget(form)}}
+
+{{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src='/js/anonce_new_edit.js'></script>
+{% endblock %}

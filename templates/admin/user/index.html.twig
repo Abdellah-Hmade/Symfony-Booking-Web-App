@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des Utilisateurs{% endblock %}
+{% set users = pagination.data %}
+{% set page = pagination.page %}
+{% set pages = pagination.pages %}
+{% block body %}
+<div class="container-fluid">
+    <h1 class="my-5">Gestion des Utilisateurs</h1>
+    <table class="table table-hover">    
+        <thead>
+            <tr>
+            <th class="text-center"></th>
+            <th class="text-center">Id</th>
+            <th class="text-center">Prenom & NOM</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">introduction</th>
+            <th class="text-center">Nombre des Annonces</th>
+            <th class="text-center">Nombre des Réservations</th>
+            <th class="text-center">Nombre des comments</th>
+            <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td><a href="{{path('admin_users_profile',{'id':user.id})}}"><img src="{{ user.avatar }}" class="avatar mr-2" alt="Avatar de {{user.tnom}}" style="width:40px;height:40px;"></a></td>
+                    <td><a href="{{path('admin_users_profile',{'id':user.id})}}">{{user.id}}</a></td>
+                    <td><a href="{{path('admin_users_profile',{'id':user.id})}}">{{user.tnom}}</a></td>   
+                    <td class="text-center">{{user.email}}</td>
+                    <td class="text-center">{{user.introduction}}</td>
+                    <td class="text-center"><span class="badge badge-dark"><a href="#">{{user.anonces | length}}</a></span></td>
+                    <td class="text-center"><span class="badge badge-dark"><a href="#">{{user.bookings | length}}</a></span></td>
+                    <td class="text-center"><span class="badge badge-dark"><a href="#">{{user.comments | length}}</a></span></td>
+                    <td>
+                    <a href="{{path('admin_users_edit',{'id':user.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="{{path('admin_users_delete',{'id':user.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>    
+            {% endfor %}
+        </tbody>
+    </table>
+    {{pagination.display()}}    
+</div>
+{% endblock %}

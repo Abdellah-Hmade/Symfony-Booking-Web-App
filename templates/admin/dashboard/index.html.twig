@@ -1,0 +1,120 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col" style="width:144px";>
+                <div class="card bg-primary text-white mb-3 text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                            <i class="fas fa-users fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title">{{ stats.users}} utilisateurs inscrits</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="width:144px";>
+                <div class="card bg-dark text-white mb-3 text-center">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                <i class="fas fa-hotel fa-3x"></i>
+                                </div>
+                                <div class="col-8">
+                                    <h4 class="card-title">{{ stats.anonces}} annonces postées</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col" style="width:144px";>
+                <div class="card bg-warning text-white mb-3 text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                            <i class="fas fa-folder fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title">{{ stats.bookings}} <br>réservations</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="width:144px";>
+            <div class="card bg-success text-white mb-3 text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                            <i class="fas fa-comments fa-3x"></i>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="card-title">{{ stats.comments}} Commentaires</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success">
+                    <h2 class="alert-heading my-3"><i class=" fas fa-arrow-up"></i>  Les Annonces Populaires</h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Annonce</th>
+                                <th>Proprio</th>
+                                <th>Moyenne</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for anonce in bestads %}
+                            <tr>
+                                <td class="text-center">
+                                    <img src="{{anonce.coverImage}}" class="coverImage"><br><strong>{{anonce.titre}}</strong>
+                                </td>
+                                <td><img src="{{anonce.avatar}}" class="avatar avatar-medium"><br><strong>{{anonce.nom}} {{anonce.prenom}}</strong></td>
+                                <td class="text-center"><span class="badge badge-dark">{{anonce.note | number_format(1,","," ")}}</span></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                <div class="alert alert-danger">
+                    <h2 class="alert-heading my-3"><i class="fas fa-arrow-down"></i>  Les Pires Annonces </h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Annonce</th>
+                                <th>Proprio</th>
+                                <th>Moyenne</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for anonce in worstads %}
+                            <tr>
+                                <td class="text-center">
+                                    <img src="{{anonce.coverImage}}" class="coverImage"><br><strong>{{anonce.titre}}</strong>
+                                </td>
+                                <td><img src="{{anonce.avatar}}" class="avatar avatar-medium"><br><strong>{{anonce.nom}} {{anonce.prenom}}</strong></td>
+                                <td class="text-center"><span class="badge badge-dark">{{anonce.note | number_format(1,","," ")}}</span></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}

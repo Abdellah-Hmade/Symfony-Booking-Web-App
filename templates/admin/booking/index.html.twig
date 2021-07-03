@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des Réservations{% endblock %}
+{% set bookings = pagination.data %}
+{% set page = pagination.page %}
+{% set pages = pagination.pages %}
+{% block body %}
+<div class="container-fluid">
+    <h1 class="my-5">Administration des réservations</h1>
+    <table class="table table-hover">    
+        <thead>
+            <tr>
+            <th class="text-center">Id</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Visiteur</th>
+            <th class="text-center">Annonce</th>
+            <th class="text-center">Montant</th>
+            <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{booking.id}}</td>
+                <td>{{booking.createdAt | date("d/m/Y")}}</td>
+                <td><img src="{{ booking.booker.avatar }}" class="avatar mr-2" alt="Avatar de {{booking.booker.tnom}}" style="width:40px;height:40px;">{{booking.booker.tnom}}</td>
+                
+                <td class="text-center">{{booking.ad.titre}}</td>
+                <td class="text-center">{{booking.amount}} &dollar; </td>
+                <td>
+                <a href="{{path('admin_bookings_edit',{'id':booking.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                <a href="{{path('admin_bookings_delete',{'id':booking.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>    
+{% endfor %}
+        </tbody>
+    </table> 
+   {{pagination.display()}}
+</div>
+{% endblock %}

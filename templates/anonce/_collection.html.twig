@@ -1,0 +1,29 @@
+{% block _anonce_images_widget %}
+<p>Içi vous pouvez ajouter vos propres images !</p>
+{{ form_widget(form) }}
+<input type='hidden' id='widgets-counter' value="0" >
+<div class="form-group">
+<button type="button" id="add_image" class="btn btn-primary" style="height:36.5;">Ajouter une image</p>
+</div>
+
+{% endblock %}
+
+{% block _anonce_images_entry_widget %}
+    <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col">
+                {{form_widget(form.url)}}
+            </div>
+            <div class="col">
+                {{form_widget(form.legend)}}
+            </div>
+            <div class="col">
+            <button type="button" id="del_image" data-action='delete' data-target="#block_{{ id }}" class="btn btn-danger" >x</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block _anonce_images_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
